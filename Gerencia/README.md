@@ -4,5 +4,5 @@ Esses documentos só devem ser alterados pelo gerente do projeto (Guilherme Cesa
 
 ## O quê resta?
 
-- [ ] Gráfico de Gantt
+- [x] Gráfico de Gantt
 - [ ] Arquivo de um software gerente de projeto (MS Project, GanttProject, etc)
