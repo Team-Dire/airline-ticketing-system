@@ -1,16 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-11-17" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3247" locale="pt_BR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-11-17" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3230" locale="pt_BR">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Nome" width="200" order="0"/>
         <field id="tpd4" name="Data inicial" width="75" order="1"/>
         <field id="tpd5" name="Data final" width="75" order="2"/>
         <option id="filter.completedTasks" value="false"/>
-        <timeline><![CDATA[7,9,0,14,6,8,2,18,3,4,1,5,16,17,13,12,11]]></timeline>
-        <option id="color.recent"><![CDATA[#000000 #00ff00 #ff00ff #0000ff #ff0000]]></option>
+        <timeline>
+            <![CDATA[13,7,0,6,1,18,4,5,12,11,14,16,2,9,8,17,3]]>
+        </timeline>
+        <option id="color.recent">
+            <![CDATA[#000000 #00ff00 #ff00ff #0000ff #ff0000]]>
+        </option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nome" width="209" order="0"/>
-        <field id="1" name="Função" width="84" order="1"/>
+        <field id="0" name="Nome" width="210" order="0"/>
+        <field id="1" name="Função" width="86" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -48,7 +52,7 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="20" name="Primeiro Sprint" color="#000000" meeting="false" start="2022-11-18" duration="30" complete="0" thirdDate="2022-11-18" thirdDate-constraint="0" expand="true">
+        <task id="20" name="Primeiro Sprint" color="#000000" meeting="false" start="2022-11-18" duration="30" complete="5" thirdDate="2022-11-18" thirdDate-constraint="0" expand="true">
             <task id="0" name="Análise (RF1 - RF5)" color="#ff0000" meeting="false" start="2022-11-18" duration="1" complete="0" thirdDate="2022-11-24" thirdDate-constraint="0" expand="true">
                 <depend id="1" type="2" difference="0" hardness="Rubber"/>
                 <depend id="6" type="2" difference="0" hardness="Rubber"/>
@@ -56,7 +60,7 @@
             <task id="1" name="SQA - Análise (RF1 - RF5)" color="#00ff00" meeting="false" start="2022-11-19" duration="1" complete="0" thirdDate="2022-11-08" thirdDate-constraint="0" priority="0" expand="true">
                 <depend id="6" type="1" difference="0" hardness="Rubber"/>
             </task>
-            <task id="6" name="Projeto (RF1 - RF5)" color="#0000ff" meeting="false" start="2022-11-28" duration="6" complete="0" thirdDate="2022-11-15" thirdDate-constraint="0" priority="4" expand="true">
+            <task id="6" name="Projeto (RF1 - RF5)" color="#0000ff" meeting="false" start="2022-11-25" duration="1" complete="100" thirdDate="2022-11-15" thirdDate-constraint="0" priority="4" expand="true">
                 <depend id="7" type="1" difference="0" hardness="Rubber"/>
                 <depend id="8" type="2" difference="0" hardness="Rubber"/>
             </task>
