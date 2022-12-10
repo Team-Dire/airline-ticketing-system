@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-11-17" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3230" locale="pt_BR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-11-24" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3230" locale="pt_BR">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Nome" width="200" order="0"/>
@@ -6,7 +6,7 @@
         <field id="tpd5" name="Data final" width="75" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <timeline>
-            <![CDATA[9,13,5,8,0,7,16,14,1,2,6,18,3,17,4,12,11]]>
+            <![CDATA[7,12,17,3,2,16,1,14,11,0,6,18,9,13,5,4,8]]>
         </timeline>
         <option id="color.recent">
             <![CDATA[#000000 #00ff00 #ff00ff #0000ff #ff0000]]>
@@ -52,7 +52,7 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="20" name="Primeiro Sprint" color="#000000" meeting="false" start="2022-11-18" duration="30" complete="12" thirdDate="2022-11-18" thirdDate-constraint="0" expand="true">
+        <task id="20" name="Primeiro Sprint" color="#000000" meeting="false" start="2022-11-18" duration="30" complete="12" thirdDate="2022-11-18" thirdDate-constraint="0" expand="false">
             <task id="0" name="Análise (RF1 - RF5)" color="#ff0000" meeting="false" start="2022-11-18" duration="1" complete="0" thirdDate="2022-11-24" thirdDate-constraint="0" expand="true">
                 <depend id="1" type="2" difference="0" hardness="Rubber"/>
                 <depend id="6" type="2" difference="0" hardness="Rubber"/>
@@ -72,22 +72,22 @@
             </task>
             <task id="12" name="Teste do Código (RF1 - RF5)" color="#00ff00" meeting="false" start="2022-12-13" duration="5" complete="0" thirdDate="2022-12-07" thirdDate-constraint="0" priority="2" expand="true"/>
         </task>
-        <task id="21" name="Segundo Sprint" color="#000000" meeting="false" start="2022-11-28" duration="31" complete="0" thirdDate="2022-11-28" thirdDate-constraint="0" expand="false">
-            <task id="2" name="Análise (RF6 - RF10)" color="#ff0000" meeting="false" start="2022-11-28" duration="3" complete="0" thirdDate="2022-11-07" thirdDate-constraint="0" expand="true">
+        <task id="21" name="Segundo Sprint" color="#000000" meeting="false" start="2022-12-06" duration="23" complete="16" thirdDate="2022-11-28" thirdDate-constraint="0" expand="true">
+            <task id="2" name="Análise (RF6 - RF10)" color="#ff0000" meeting="false" start="2022-12-06" duration="1" complete="100" thirdDate="2022-11-07" thirdDate-constraint="0" expand="true">
                 <depend id="3" type="2" difference="0" hardness="Rubber"/>
                 <depend id="9" type="2" difference="0" hardness="Rubber"/>
             </task>
-            <task id="3" name="SQA - Análise (RF6 - RF10)" color="#00ff00" meeting="false" start="2022-12-01" duration="2" complete="0" thirdDate="2022-11-04" thirdDate-constraint="0" priority="0" expand="true">
+            <task id="3" name="SQA - Análise (RF6 - RF10)" color="#00ff00" meeting="false" start="2022-12-07" duration="3" complete="100" thirdDate="2022-11-04" thirdDate-constraint="0" priority="0" expand="true">
                 <depend id="9" type="2" difference="0" hardness="Rubber"/>
             </task>
-            <task id="9" name="Projeto (RF6 - RF10)" color="#0000ff" meeting="false" start="2022-12-10" duration="7" complete="0" thirdDate="2022-11-22" thirdDate-constraint="0" priority="4" expand="true">
+            <task id="9" name="Projeto (RF6 - RF10)" color="#0000ff" meeting="false" start="2022-12-11" duration="7" complete="0" thirdDate="2022-11-22" thirdDate-constraint="0" priority="4" expand="true">
                 <depend id="11" type="2" difference="0" hardness="Rubber"/>
                 <depend id="13" type="2" difference="0" hardness="Rubber"/>
             </task>
-            <task id="11" name="SQA - Projeto (RF6 - RF10)" color="#00ff00" meeting="false" start="2022-12-17" duration="4" complete="0" thirdDate="2022-11-29" thirdDate-constraint="0" priority="2" expand="true">
+            <task id="11" name="SQA - Projeto (RF6 - RF10)" color="#00ff00" meeting="false" start="2022-12-18" duration="4" complete="0" thirdDate="2022-11-29" thirdDate-constraint="0" priority="2" expand="true">
                 <depend id="13" type="2" difference="0" hardness="Rubber"/>
             </task>
-            <task id="13" name="Codificação (RF6 - RF10)" color="#ff00ff" meeting="false" start="2023-01-02" duration="5" complete="0" thirdDate="2022-12-05" thirdDate-constraint="0" priority="4" expand="true">
+            <task id="13" name="Codificação (RF6 - RF10)" color="#ff00ff" meeting="false" start="2023-01-03" duration="5" complete="0" thirdDate="2022-12-05" thirdDate-constraint="0" priority="4" expand="true">
                 <depend id="14" type="1" difference="0" hardness="Rubber"/>
             </task>
             <task id="14" name="Teste do Código (RF6 - RF10)" color="#00ff00" meeting="false" start="2023-01-06" duration="4" complete="0" thirdDate="2022-12-07" thirdDate-constraint="0" priority="2" expand="true"/>
