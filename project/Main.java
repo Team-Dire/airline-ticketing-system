@@ -1,18 +1,15 @@
-import src.classes.Airport;
 import src.controllers.AirportController;
-
-import java.util.Date;
+import src.models.Airport;
 
 public class Main {
     Airport airport;
-
     AirportController airportController;
+
 
     public Main() {
         airport = new Airport();
         airportController = new AirportController(airport);
-
-        airportController.newFlightSchedule("LAX", "JFK", "Boeing 747", new Date(), new Date(), "Weekly");
+        new src.views.Main(airportController);
 
     }
 

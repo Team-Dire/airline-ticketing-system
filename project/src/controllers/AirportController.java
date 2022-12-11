@@ -1,8 +1,9 @@
 package src.controllers;
 
-import src.classes.Airport;
+import src.models.Airport;
+import src.utils.types.Recurrence;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class AirportController {
     private final Airport airport;
@@ -11,7 +12,7 @@ public class AirportController {
         this.airport = airport;
     }
 
-    public void newFlightSchedule(String originAirport, String destinationAirport, String airplane, Date departureDate, Date departureDateReal, String recurring) {
-        airport.scheduleFlight(originAirport, destinationAirport, airplane, departureDate, departureDateReal, recurring);
+    public boolean newFlightSchedule(String originAirport, String destinationAirport, String airplane, LocalDateTime departureDate, Recurrence recurring) {
+        return airport.scheduleFlight(originAirport, destinationAirport, airplane, departureDate, recurring);
     }
 }
