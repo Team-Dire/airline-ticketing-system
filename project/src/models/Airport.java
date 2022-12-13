@@ -19,19 +19,25 @@ public class Airport {
     public boolean scheduleFlight(String originAirport, String destinationAirport, String airplane, LocalDateTime departureDate, Recurrence recurring) {
         LocalDateTime sevenDaysFromNow = LocalDateTime.now().plusDays(7);
         if (departureDate.isBefore(sevenDaysFromNow)) {
-            System.out.println("You can only schedule flights after 7 days from now");
+            System.out.println("Você não pode agendar um voo com menos de 7 dias de antecedência.");
             return false;
         }
 
         if (departureDate.isBefore(LocalDateTime.now())) {
-            System.out.println("You can't schedule a flight in the past.");
+            System.out.println("Você não pode agendar voos no passado");
             return false;
         }
 
         // If the flight is 30 minutes before or after from any other flight, it can't be scheduled
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight.getDepartureDate().isBefore(departureDate.plusMinutes(30)) && scheduledFlight.getDepartureDate().isAfter(departureDate.minusMinutes(30))) {
-                System.out.println("You can't schedule a flight 30 minutes before or after another flight.");
+            LocalDateTime departureTime = scheduledFlight.getDepartureDate();
+            String originAirportCode = scheduledFlight.getOriginAirport();
+
+            boolean isSameAirport = originAirportCode.equals(originAirport);
+            boolean isBefore = departureTime.isBefore(departureDate.plusMinutes(30));
+            boolean isAfter = departureTime.isAfter(departureDate.minusMinutes(30));
+            if (isSameAirport && (isBefore || isAfter)) {
+                System.out.println("Você não pode agendar um voo 30 minutos antes ou depois de outro voo.");
                 return false;
             }
         }

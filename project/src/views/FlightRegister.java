@@ -116,6 +116,17 @@ public class FlightRegister {
                 JOptionPane.showMessageDialog(null, "Data ou hora inválida");
                 return;
             }
+            if (originAirport.length() < 3 || destinationAirport.length() < 3) {
+                JOptionPane.showMessageDialog(null, "Código de aeroporto inválido");
+                return;
+            }
+
+            if (originAirport.equals(destinationAirport)) {
+                JOptionPane.showMessageDialog(null, "Aeroporto de origem e destino não podem ser iguais");
+                return;
+            }
+            
+
             boolean success = airportController.newFlightSchedule(originAirport, destinationAirport, airplane, departureDateTime, recurring);
             if (success) {
                 JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso");
