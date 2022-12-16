@@ -1,0 +1,17 @@
+
+w
+java:S1450"\Remove the "airplaneField" field and declare it as a local variable in the relevant methods.(‚£˜†øÿÿÿÿ
+{
+java:S1450"`Remove the "recurringComboBox" field and declare it as a local variable in the relevant methods.(³éøüüÿÿÿÿ
+b
+java:S3252"LUse static access with "javax.swing.WindowConstants" for "DISPOSE_ON_CLOSE".(×Ð‘÷
+m
+java:S3776!"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(Á›°çýÿÿÿÿ
+U
+java:S1161.":Add the "@Override" annotation above this method signature(Õþ°ýüÿÿÿÿ
+U
+java:S11617":Add the "@Override" annotation above this method signature(Õþ°ýüÿÿÿÿ
+U
+java:S1161B":Add the "@Override" annotation above this method signature(Õþ°ýüÿÿÿÿ
+U
+java:S1161K":Add the "@Override" annotation above this method signature(Õþ°ýüÿÿÿÿ
