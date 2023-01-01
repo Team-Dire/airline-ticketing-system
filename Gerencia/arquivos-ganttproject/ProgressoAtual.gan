@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-12-04" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3230" locale="pt_BR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-12-16" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3230" locale="pt_BR">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Nome" width="200" order="0"/>
@@ -6,7 +6,7 @@
         <field id="tpd5" name="Data final" width="75" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <timeline>
-            <![CDATA[17,11,0,8,12,9,14,13,4,7,6,1,5,3,16,2,18]]>
+            <![CDATA[1,13,12,3,18,5,8,6,11,2,4,17,16,0,14,7,9]]>
         </timeline>
         <option id="color.recent">
             <![CDATA[#000000 #00ff00 #ff00ff #0000ff #ff0000]]>
@@ -17,7 +17,7 @@
         <field id="1" name="Função" width="86" order="1"/>
     </view>
     <!-- -->
-    <calendars>
+    <calendars base-id="Nenhum">
         <day-types>
             <day-type id="0"/>
             <day-type id="1"/>
@@ -35,9 +35,6 @@
         <date year="2022" month="12" date="27" type="HOLIDAY"/>
         <date year="2022" month="12" date="28" type="HOLIDAY"/>
         <date year="2022" month="12" date="29" type="HOLIDAY"/>
-        <date year="2022" month="12" date="30" type="HOLIDAY"/>
-        <date year="2022" month="12" date="31" type="HOLIDAY"/>
-        <date year="2023" month="1" date="1" type="HOLIDAY"/>
     </calendars>
     <tasks empty-milestones="true">
         <taskproperties>
@@ -72,7 +69,7 @@
             </task>
             <task id="12" name="Teste do Código (RF1 - RF5)" color="#00ff00" meeting="false" start="2022-12-12" duration="2" complete="100" thirdDate="2022-12-07" thirdDate-constraint="0" priority="2" expand="true"/>
         </task>
-        <task id="21" name="Segundo Sprint" color="#000000" meeting="false" start="2022-12-06" duration="23" complete="47" thirdDate="2022-11-28" thirdDate-constraint="0" expand="true">
+        <task id="21" name="Segundo Sprint" color="#000000" meeting="false" start="2022-12-06" duration="26" complete="47" thirdDate="2022-11-28" thirdDate-constraint="0" expand="false">
             <task id="2" name="Análise (RF6 - RF10)" color="#ff0000" meeting="false" start="2022-12-06" duration="1" complete="100" thirdDate="2022-11-07" thirdDate-constraint="0" expand="true">
                 <depend id="3" type="2" difference="0" hardness="Rubber"/>
                 <depend id="9" type="2" difference="0" hardness="Rubber"/>
@@ -92,15 +89,15 @@
             </task>
             <task id="14" name="Teste do Código (RF6 - RF10)" color="#00ff00" meeting="false" start="2023-01-06" duration="4" complete="0" thirdDate="2022-12-07" thirdDate-constraint="0" priority="2" expand="true"/>
         </task>
-        <task id="22" name="Terceiro Sprint" meeting="false" start="2022-12-05" duration="39" complete="0" expand="false">
-            <task id="4" name="Análise (RF11 - RF12)" color="#ff0000" meeting="false" start="2022-12-05" duration="5" complete="0" thirdDate="2022-11-09" thirdDate-constraint="0" expand="true">
+        <task id="22" name="Terceiro Sprint" meeting="false" start="2022-12-30" duration="26" complete="3" expand="true">
+            <task id="4" name="Análise (RF11 - RF12)" color="#ff0000" meeting="false" start="2022-12-30" duration="1" complete="100" thirdDate="2022-11-09" thirdDate-constraint="0" expand="true">
                 <depend id="5" type="2" difference="0" hardness="Rubber"/>
                 <depend id="15" type="2" difference="0" hardness="Rubber"/>
             </task>
-            <task id="5" name="SQA - Análise (RF11 - RF12)" color="#00ff00" meeting="false" start="2022-12-10" duration="3" complete="0" thirdDate="2022-11-15" thirdDate-constraint="0" expand="true">
+            <task id="5" name="SQA - Análise (RF11 - RF12)" color="#00ff00" meeting="false" start="2022-12-31" duration="3" complete="0" thirdDate="2022-11-15" thirdDate-constraint="0" expand="true">
                 <depend id="15" type="2" difference="0" hardness="Rubber"/>
             </task>
-            <task id="15" name="Projeto (RF11 - RF12)" color="#0000ff" meeting="false" start="2023-01-02" duration="7" complete="0" thirdDate="2022-12-07" thirdDate-constraint="0" priority="2" expand="true">
+            <task id="15" name="Projeto (RF11 - RF12)" color="#0000ff" meeting="false" start="2023-01-03" duration="7" complete="0" thirdDate="2022-12-07" thirdDate-constraint="0" priority="2" expand="true">
                 <depend id="16" type="1" difference="0" hardness="Rubber"/>
                 <depend id="17" type="2" difference="0" hardness="Rubber"/>
             </task>
