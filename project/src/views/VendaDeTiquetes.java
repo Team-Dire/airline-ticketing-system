@@ -5,11 +5,13 @@ import src.controllers.ControladorVenda;
 import src.models.Voo;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class VendaDeTiquetes {
     private final ControladorVenda controladorVenda;
+    private ArrayList<Voo> voosDisponiveis;
 
     JFrame frame;
 
@@ -18,6 +20,7 @@ public class VendaDeTiquetes {
 
     public VendaDeTiquetes(ControladorVenda controladorVenda) {
         this.controladorVenda = controladorVenda;
+        this.voosDisponiveis = new ArrayList<>();
         frame = new JFrame("Vender passagem");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(700, 500);
@@ -28,6 +31,7 @@ public class VendaDeTiquetes {
 
     private void createUIComponents() {
         voosList.setBounds(125, 10, 300, 500);
+        
         this.buscarVoos("", "", false);
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -73,12 +77,27 @@ public class VendaDeTiquetes {
 
         panel.add(voosList);
 
+        // call this.mostrarVoo if some element is double clicked
+        voosList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int index = voosList.locationToIndex(evt.getPoint());
+                    mostrarVoo(voosDisponiveis.get(index));
+                }
+            }
+        });
+
         frame.add(panel);
+    }
+
+    private void mostrarVoo(Voo voo) {
+        System.out.println("aaa");
+        System.out.println(voo);
     }
 
     private void buscarVoos(String origem, String destino, boolean isIdaVolta) {
         ArrayList<Voo> voos = controladorVenda.getVoosDisponiveis(origem, destino, isIdaVolta);
-
+        this.voosDisponiveis = voos;
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Voo voo : voos) {
             String dateBRL = voo.getHorarioPrevisto().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
