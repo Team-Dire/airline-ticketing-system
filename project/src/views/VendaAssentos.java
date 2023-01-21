@@ -103,13 +103,36 @@ public class VendaAssentos {
                 JOptionPane.showMessageDialog(null, "Tipo de documento do passageiro não pode ser vazio");
                 return;
             }
+            if (tipoDocumento.equals("CPF")) {
+                if (!vat.matches("[0-9]{11}")) {
+                    JOptionPane.showMessageDialog(null, "CPF deve conter 11 dígitos");
+                    return;
+                }
+            } else if (tipoDocumento.equals("RG")) {
+                if (!vat.matches("[0-9]{9}")) {
+                    JOptionPane.showMessageDialog(null, "RG deve conter 9 dígitos");
+                    return;
+                }
+            } else if (tipoDocumento.equals("Passaporte")) {
+                if (!vat.matches("[0-9]{9}")) {
+                    JOptionPane.showMessageDialog(null, "Passaporte deve conter 9 dígitos");
+                    return;
+                }
+            }
+
+
             LocalDate dataNascimentoPassageiro;
             try {
                 dataNascimentoPassageiro = LocalDate.parse(dataNascimentoField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                if (dataNascimentoPassageiro.isAfter(LocalDate.now())) {
+                    JOptionPane.showMessageDialog(null, "Data de nascimento não pode ser no futuro");
+                    return;
+                }
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
                 return;
             }
+
 
             String assentoPassageiro = assentoField.getSelectedItem().toString();
             if (assentoPassageiro.isEmpty()) {
