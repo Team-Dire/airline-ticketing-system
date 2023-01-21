@@ -5,6 +5,7 @@ import src.models.Classe;
 import src.models.Voo;
 import src.models.VooProgramado;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ControladorVenda {
@@ -20,4 +21,10 @@ public class ControladorVenda {
     public ArrayList<Voo> getVoosDisponiveis(String origem, String destino, boolean isIdaVolta) {
         return aeroporto.getVoosDisponiveis(origem, destino, isIdaVolta);
     }
+
+    public boolean novaVenda(String nomeCompleto, LocalDate dataNascimento, String numId, String tipoNumId, Voo voo, String classe, String assento) {
+        boolean possivelOcupar = aeroporto.vagaLivreVoo(nomeCompleto,dataNascimento, numId,  tipoNumId,  voo, classe, assento);
+        return possivelOcupar;
+    }
+
 }

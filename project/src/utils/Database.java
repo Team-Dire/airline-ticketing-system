@@ -314,6 +314,22 @@ public class Database {
         }
     }
 
+    public boolean atualizarVaga(Classe classe, Vaga vaga) {
+        Passageiro passageiro = vaga.getPassageiro();
+        String query = String.format("""
+                        UPDATE vagas SET ocupada = %d, nomeCompleto = '%s', dataNascimento = '%s', numId = '%s', tipoNumId = '%s' WHERE classeId = %d AND assento = '%s'
+                        """,
+                passageiro != null ? 1 : 0,
+                passageiro != null ? passageiro.getNomeCompleto() : "",
+                passageiro != null ? passageiro.getDataNascimento().toString() : "",
+                passageiro != null ? passageiro.getNumId() : "",
+                passageiro != null ? passageiro.getTipoNumId().toString() : "",
+                classe.getId(),
+                vaga.getAssento()
+        );
+        return execute(query);
+    }
+
     public ArrayList<Voo> obterVoos() {
         String query = String.format("""
                 SELECT * FROM voos JOIN voosProgramados ON voos.vooProgramadoId = voosProgramados.id
@@ -338,8 +354,11 @@ public class Database {
                 ArrayList<Vaga> vagasClasse = new ArrayList<>();
 
                 for (String[] vaga : vagas) {
+//                    for (int i = 0; i < vaga.length; i++) {
+//                        System.out.println("Field " + i + ": " + vaga[i]);
+//                    }
                     String assento = vaga[1];
-                    boolean ocupada = Boolean.parseBoolean(vaga[2]);
+                    boolean ocupada = vaga[2].equals("1");
                     String nomeCompleto = vaga[3];
                     LocalDate dataNascimento = vaga[4] == null ? null : LocalDate.parse(vaga[4]);
                     String numId = vaga[5];
@@ -348,9 +367,9 @@ public class Database {
                     Vaga vagaClasse = new Vaga(assento, ocupada, passageiro);
                     vagasClasse.add(vagaClasse);
                 }
-
+                int id = Integer.parseInt(classe[0]);
                 String tipoClasse = classe[2];
-                Classe classeVoo = new Classe(tipoClasse, vagasClasse);
+                Classe classeVoo = new Classe(id, tipoClasse, vagasClasse);
                 classesVoo.add(classeVoo);
             }
 

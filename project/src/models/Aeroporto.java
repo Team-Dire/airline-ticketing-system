@@ -3,6 +3,7 @@ package src.models;
 import src.utils.Database;
 import src.utils.types.Recorrencias;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -119,5 +120,26 @@ public class Aeroporto {
         db.criarVoosDesdeVoosProgramados(vooProgramados);
         ArrayList<Voo> voos = db.obterVoos();
         this.voos = voos;
+    }
+
+    public boolean vagaLivreVoo(String nomeCompleto, LocalDate dataNascimento, String numId, String tipoNumId, Voo voo, String classe, String assento) {
+        Classe classeDesejada = voo.getClasses().stream().filter(c -> c.getTipoClasse().toString().equals(classe)).findFirst().orElse(null);
+        if (classeDesejada == null) {
+            return false;
+        }
+
+        Vaga vagaDesejada = classeDesejada.getVagas().stream().filter(v -> v.getAssento().equals(assento)).findFirst().orElse(null);
+        if (vagaDesejada == null) {
+            return false;
+        }
+
+        Vaga vagaOcupada = vagaDesejada.ocuparVaga(nomeCompleto, dataNascimento, numId, tipoNumId);
+
+        if (vagaOcupada == null) {
+            return false;
+        }
+        db.atualizarVaga(classeDesejada, vagaOcupada);
+
+        return true;
     }
 }

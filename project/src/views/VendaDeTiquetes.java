@@ -23,14 +23,17 @@ public class VendaDeTiquetes {
         this.voosDisponiveis = new ArrayList<>();
         frame = new JFrame("Vender passagem");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(700, 500);
+        frame.setSize(450, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         createUIComponents();
     }
 
     private void createUIComponents() {
-        voosList.setBounds(125, 10, 300, 500);
+//        voosList.setBounds(125, 40, 300, 500);
+        JScrollPane scrollPane = new JScrollPane(voosList);
+        scrollPane.setBounds(125, 40, 300, 500);
+
         
         this.buscarVoos("", "", false);
         JPanel panel = new JPanel();
@@ -52,30 +55,31 @@ public class VendaDeTiquetes {
         destinoField.setBounds(10, 110, 100, 30);
         panel.add(destinoField);
 
-        JLabel idaEVoltaLabel = new JLabel("Ida e volta");
-        idaEVoltaLabel.setBounds(10, 150, 100, 30);
-        panel.add(idaEVoltaLabel);
+//        JLabel idaEVoltaLabel = new JLabel("Ida e volta");
+//        idaEVoltaLabel.setBounds(10, 150, 100, 30);
+//        panel.add(idaEVoltaLabel);
 
-        JCheckBox idaEVoltaCheckbox = new JCheckBox();
-        idaEVoltaCheckbox.setBounds(10, 180, 100, 30);
-        panel.add(idaEVoltaCheckbox);
+//        JCheckBox idaEVoltaCheckbox = new JCheckBox();
+//        idaEVoltaCheckbox.setBounds(10, 180, 100, 30);
+//        panel.add(idaEVoltaCheckbox);
 
         JButton buscarVoosButton = new JButton("Buscar voos");
-        buscarVoosButton.setBounds(10, 210, 100, 30);
+        buscarVoosButton.setBounds(10, 150, 100, 30);
         buscarVoosButton.addActionListener(e -> {
                     String origem = origemField.getText();
                     String destino = destinoField.getText();
-                    boolean isIdaVolta = idaEVoltaCheckbox.isSelected();
+//                    boolean isIdaVolta = idaEVoltaCheckbox.isSelected();
+                    boolean isIdaVolta = false;
                     this.buscarVoos(origem, destino, isIdaVolta);
                 }
         );
         panel.add(buscarVoosButton);
 
         JLabel voosLabel = new JLabel("Voos");
-        voosLabel.setBounds(10, 260, 100, 30);
+        voosLabel.setBounds(125, 10, 100, 30);
         panel.add(voosLabel);
 
-        panel.add(voosList);
+        panel.add(scrollPane);
 
         // call this.mostrarVoo if some element is double clicked
         voosList.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -91,8 +95,7 @@ public class VendaDeTiquetes {
     }
 
     private void mostrarVoo(Voo voo) {
-        System.out.println("aaa");
-        System.out.println(voo);
+        VendaAssentos vendaAssentos = new VendaAssentos(controladorVenda, voo);
     }
 
     private void buscarVoos(String origem, String destino, boolean isIdaVolta) {
@@ -109,9 +112,6 @@ public class VendaDeTiquetes {
         voosList.setListData(listModel.toArray());
     }
 
-
-
-//        ArrayList<Voo> voos = controladorVenda.getVoosDisponiveis("AAAA", "BBBB", true);
 
 
 }

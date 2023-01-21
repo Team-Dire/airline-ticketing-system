@@ -117,7 +117,8 @@ public class Voo {
     public ArrayList<String> getAssentosDisponiveis(String classeString) {
         ArrayList<String> assentos = new ArrayList<>();
         for (Classe classe : classes) {
-            if (classe.getTipoClasse().toString().equals(classeString)) {
+            String classeNome = classe.getTipoClasse().toString();
+            if (classeNome.equals(classeString)) {
                 for (Vaga vaga : classe.getVagas()) {
                     if (!vaga.isOcupada()) {
                         assentos.add(vaga.getAssento());

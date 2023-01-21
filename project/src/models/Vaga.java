@@ -16,7 +16,7 @@ public class Vaga {
 
     public Vaga(String assento, boolean ocupada, Passageiro passageiro) {
         this.assento = assento;
-        this.ocupada = true;
+        this.ocupada = ocupada;
         this.passageiro = passageiro;
     }
 
@@ -39,5 +39,16 @@ public class Vaga {
 
     public boolean isOcupada() {
         return ocupada;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                Vaga:
+                Passageiro: %s
+                Assento: %s
+                Ocupada: %s
+                """, passageiro, assento, ocupada);
+
     }
 }
