@@ -1,7 +1,7 @@
 package src.views;
 
-import src.controllers.AirportController;
-import src.utils.types.Recurrence;
+import src.controllers.ControladorAeroporto;
+import src.utils.types.Recorrencias;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class FlightRegister {
-    private final AirportController airportController;
+public class RegistradorDeVoos {
+    private final ControladorAeroporto controladorAeroporto;
     private final JFrame frame;
     private JTextField originAirportField;
     private JTextField destinationAirportField;
@@ -20,8 +20,8 @@ public class FlightRegister {
     private JTextField departureTimeField;
     private JComboBox<?> recurringComboBox;
 
-    public FlightRegister(AirportController airportController) {
-        this.airportController = airportController;
+    public RegistradorDeVoos(ControladorAeroporto controladorAeroporto) {
+        this.controladorAeroporto = controladorAeroporto;
         frame = new JFrame("Cadastrar voo");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(700, 500);
@@ -32,7 +32,12 @@ public class FlightRegister {
 
     private void createUIComponents() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 2));
+        panel.setLayout(new GridLayout(7, 2, 5, 5));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+
+
+
         JLabel originAirportLabel = new JLabel("Aeroporto de origem");
         JLabel destinationAirportLabel = new JLabel("Aeroporto de destino");
         JLabel airplaneLabel = new JLabel("Avião");
@@ -44,40 +49,82 @@ public class FlightRegister {
         originAirportField = new JTextField();
         originAirportField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                if (!Character.isLetter(evt.getKeyChar()) || originAirportField.getText().length() >= 4) {
+                char c = evt.getKeyChar();
+                if (Character.isLowerCase(c)) {
+                    String s = ("" + c).toUpperCase();
+                    c = s.charAt(0);
+                    evt.setKeyChar(c);
+                }
+                if (originAirportField.getText().length() > 3 || !Character.isLetter(c)) {
                     evt.consume();
                 }
             }
         });
 
+
+
         destinationAirportField = new JTextField();
+
         destinationAirportField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                if (!Character.isLetter(evt.getKeyChar()) || destinationAirportField.getText().length() >= 4) {
+                char c = evt.getKeyChar();
+                if (Character.isLowerCase(c)) {
+                    String s = ("" + c).toUpperCase();
+                    c = s.charAt(0);
+                    evt.setKeyChar(c);
+                }
+                if (destinationAirportField.getText().length() > 3 || !Character.isLetter(c)) {
                     evt.consume();
                 }
             }
         });
+
 
         airplaneField = new JTextField();
 
         departureDateField = new JTextField();
         departureDateField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                if (departureDateField.getText().length() >= 10) {
+                if (departureDateField.getText().length() > 9) {
                     evt.consume();
                 }
             }
         });
 
         departureTimeField = new JTextField();
-        departureTimeField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                if (departureTimeField.getText().length() >= 5) {
-                    evt.consume();
-                }
+        // Regex for HH:DD. If not, consume the key
+        departureTimeField.setInputVerifier(new InputVerifier() {
+            @Override
+            public boolean verify(JComponent input) {
+                JTextField textField = (JTextField) input;
+                String text = textField.getText();
+                return text.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]");
             }
         });
+        departureTimeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                String text = departureTimeField.getText();
+                boolean isDigit = Character.isDigit(c);
+                boolean isColon = c == ':';
+                int length = text.length();
+
+                // RULES:
+                boolean invalidLength = length > 4;
+                boolean invalidChar = !isDigit && !isColon;
+                // 00:00 to 23:59
+                boolean invalidHour = length == 2 && Integer.parseInt(text) > 23;
+                boolean invalidMinute = length == 5 && Integer.parseInt(text.substring(3)) > 59;
+                boolean invalidAlphaPosition = length == 2 && isDigit;
+                boolean invalidColonPosition = length != 2 && isColon;
+
+                if (invalidLength || invalidChar || invalidHour || invalidMinute || invalidAlphaPosition || invalidColonPosition) {
+                    evt.consume();
+                }
+
+            }
+        });
+
 
         String[] recurrenceValues = {"Diário", "Semanal", "Mensal", "Único"};
         recurringComboBox = new JComboBox<>(recurrenceValues);
@@ -89,19 +136,12 @@ public class FlightRegister {
             String airplane = airplaneField.getText();
 
             String recurrenceValue = Objects.requireNonNull(recurringComboBox.getSelectedItem()).toString();
-            Recurrence recurring;
+            Recorrencias recurring;
             switch (recurrenceValue) {
-                case "Mensal":
-                    recurring = Recurrence.MONTHLY;
-                    break;
-                case "Semanal":
-                    recurring = Recurrence.WEEKLY;
-                    break;
-                case "Diário":
-                    recurring = Recurrence.DAILY;
-                    break;
-                default:
-                    recurring = Recurrence.NONE;
+                case "Diário" -> recurring = Recorrencias.DIÁRIO;
+                case "Semanal" -> recurring = Recorrencias.SEMANAL;
+                case "Mensal" -> recurring = Recorrencias.MENSAL;
+                default -> recurring = Recorrencias.ÚNICO;
             }
 
             LocalDateTime departureDateTime;
@@ -116,7 +156,7 @@ public class FlightRegister {
                 JOptionPane.showMessageDialog(null, "Data ou hora inválida");
                 return;
             }
-            if (originAirport.length() < 3 || destinationAirport.length() < 3) {
+            if (originAirport.length() < 3 || destinationAirport.length() < 3 || originAirport.length() > 4 || destinationAirport.length() > 4) {
                 JOptionPane.showMessageDialog(null, "Código de aeroporto inválido");
                 return;
             }
@@ -126,13 +166,12 @@ public class FlightRegister {
                 return;
             }
             
-
-            boolean success = airportController.newFlightSchedule(originAirport, destinationAirport, airplane, departureDateTime, recurring);
-            if (success) {
+            String msg = controladorAeroporto.novoAgendamentoDeVoo(originAirport, destinationAirport, airplane, departureDateTime, recurring, 68, 16, 16);
+            if (msg.equals("Sucesso")) {
                 JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso");
                 frame.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o voo");
+                JOptionPane.showMessageDialog(null, msg);
             }
         });
         panel.add(originAirportLabel);

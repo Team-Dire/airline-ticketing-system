@@ -1,15 +1,18 @@
-import src.controllers.AirportController;
-import src.models.Airport;
+import src.controllers.ControladorAeroporto;
+import src.controllers.ControladorVenda;
+import src.models.Aeroporto;
 
 public class Main {
-    Airport airport;
-    AirportController airportController;
+    Aeroporto aeroporto;
+    ControladorAeroporto controladorAeroporto;
+    ControladorVenda controladorVenda;
 
 
     public Main() {
-        airport = new Airport();
-        airportController = new AirportController(airport);
-        new src.views.Main(airportController);
+        aeroporto = new Aeroporto();
+        controladorAeroporto = new ControladorAeroporto(aeroporto);
+        controladorVenda = new ControladorVenda(aeroporto);
+        new src.views.Main(controladorAeroporto, controladorVenda);
 
     }
 
