@@ -2,10 +2,11 @@ package src.models;
 
 import src.utils.types.ClasseAssentos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Classe {
+public class Classe implements Serializable {
     private final int id;
     private final ClasseAssentos tipoClasse;
     private final ArrayList<Vaga> vagas;

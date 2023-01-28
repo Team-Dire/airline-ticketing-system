@@ -1,8 +1,9 @@
 package src.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Passageiro {
+public class Passageiro implements Serializable {
     private final String nomeCompleto;
     private final String numId;
     private final String tipoNumId;

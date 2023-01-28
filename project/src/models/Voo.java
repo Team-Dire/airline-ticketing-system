@@ -3,11 +3,12 @@ package src.models;
 import src.utils.types.ClasseAssentos;
 import src.utils.types.Recorrencias;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Voo {
+public class Voo implements Serializable {
 
     private int id;
     private int vooProgramadoId;
@@ -29,6 +30,21 @@ public class Voo {
         this.horarioPartida = horarioPartida;
         this.recorrencias = recorrencias;
         this.classes = classes;
+    }
+
+    public Voo(VooProgramado vooProgramado) {
+        this.id = vooProgramado.getId();
+        this.vooProgramadoId = vooProgramado.getId();
+        this.aeroportoOrigem = vooProgramado.getAeroportoOrigem();
+        this.aeroportoDestino = vooProgramado.getAeroportoDestino();
+        this.aeroporto = vooProgramado.getAviao();
+        this.horarioPrevisto = vooProgramado.getHorarioPrevisto();
+        this.horarioPartida = vooProgramado.getHorarioPrevisto();
+        this.recorrencias = vooProgramado.getRecorrencias();
+        this.classes = new ArrayList<>();
+        this.classes.add(new Classe(ClasseAssentos.ECONÔMICA, vooProgramado.getVagasEconomica()));
+        this.classes.add(new Classe(ClasseAssentos.EXECUTIVA, vooProgramado.getVagasExecutiva()));
+        this.classes.add(new Classe(ClasseAssentos.PRIMEIRA_CLASSE, vooProgramado.getVagasPrimeiraClasse()));
     }
 
 

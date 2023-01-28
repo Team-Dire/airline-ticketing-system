@@ -1,6 +1,8 @@
 package src.utils.types;
 
-public enum ClasseAssentos {
+import java.io.Serializable;
+
+public enum ClasseAssentos implements Serializable {
     ECONÔMICA,
     EXECUTIVA,
     PRIMEIRA_CLASSE,

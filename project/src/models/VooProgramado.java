@@ -3,10 +3,11 @@ package src.models;
 import src.utils.types.ClasseAssentos;
 import src.utils.types.Recorrencias;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class VooProgramado {
+public class VooProgramado implements Serializable {
 
     private int id;
     private String aeroportoOrigem;

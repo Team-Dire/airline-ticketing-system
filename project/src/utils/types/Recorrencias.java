@@ -1,6 +1,8 @@
 package src.utils.types;
 
-public enum Recorrencias {
+import java.io.Serializable;
+
+public enum Recorrencias implements Serializable {
     DIÁRIO,
     SEMANAL,
     MENSAL,

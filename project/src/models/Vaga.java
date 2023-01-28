@@ -1,8 +1,9 @@
 package src.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Vaga {
+public class Vaga implements Serializable {
     private Passageiro passageiro;
     private final String assento;
     private boolean ocupada;

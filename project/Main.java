@@ -9,11 +9,10 @@ public class Main {
 
 
     public Main() {
-        aeroporto = new Aeroporto();
+        aeroporto = Aeroporto.getInstance();
         controladorAeroporto = new ControladorAeroporto(aeroporto);
         controladorVenda = new ControladorVenda(aeroporto);
         new src.views.Main(controladorAeroporto, controladorVenda);
-
     }
 
     public static void main(String[] args) {
