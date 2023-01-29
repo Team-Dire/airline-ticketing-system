@@ -33,16 +33,6 @@ public class Classe implements Serializable {
         return id;
     }
 
-    public boolean ocuparVaga(String nomeCompleto, LocalDate dataNascimento, String numId, String tipoNumId, String assento) {
-        for (Vaga vaga : vagas) {
-            if (vaga.getAssento().equals(assento) && !vaga.isOcupada()) {
-                Vaga vagaOcupada = vaga.ocuparVaga(nomeCompleto, dataNascimento, numId, tipoNumId);
-                // if the seat is already occupied, return false
-                return vagaOcupada != null && vagaOcupada.getPassageiro().getNumId().equals(numId);
-            }
-        }
-        return false;
-    }
 
     public ClasseAssentos getTipoClasse() {
         return tipoClasse;

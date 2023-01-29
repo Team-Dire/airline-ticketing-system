@@ -4,7 +4,6 @@ import src.utils.types.ClasseAssentos;
 import src.utils.types.Recorrencias;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -18,29 +17,32 @@ public class Voo implements Serializable {
     private LocalDateTime horarioPrevisto;
     private LocalDateTime horarioPartida;
     private Recorrencias recorrencias;
+    private final int distanciaEmKm;
     private ArrayList<Classe> classes;
 
-    public Voo(int id, int vooProgramadoId, String aeroportoOrigem, String aeroportoDestino, String aviao, LocalDateTime horarioPrevisto, LocalDateTime horarioPartida, Recorrencias recorrencias, ArrayList<Classe> classes) {
-        this.id = id;
-        this.vooProgramadoId = vooProgramadoId;
-        this.aeroportoOrigem = aeroportoOrigem;
-        this.aeroportoDestino = aeroportoDestino;
-        this.aeroporto = aviao;
-        this.horarioPrevisto = horarioPrevisto;
-        this.horarioPartida = horarioPartida;
-        this.recorrencias = recorrencias;
-        this.classes = classes;
-    }
+//    public Voo(int id, int vooProgramadoId, String aeroportoOrigem, String aeroportoDestino, String aviao, LocalDateTime horarioPrevisto, LocalDateTime horarioPartida, Recorrencias recorrencias, int distanciaEmKm, ArrayList<Classe> classes) {
+//        this.id = id;
+//        this.vooProgramadoId = vooProgramadoId;
+//        this.aeroportoOrigem = aeroportoOrigem;
+//        this.aeroportoDestino = aeroportoDestino;
+//        this.aeroporto = aviao;
+//        this.horarioPrevisto = horarioPrevisto;
+//        this.horarioPartida = null;
+//        this.recorrencias = recorrencias;
+//        this.distanciaEmKm = distanciaEmKm;
+//        this.classes = classes;
+//    }
 
-    public Voo(VooProgramado vooProgramado) {
-        this.id = vooProgramado.getId();
+    public Voo(int id, VooProgramado vooProgramado) {
+        this.id = id;
         this.vooProgramadoId = vooProgramado.getId();
         this.aeroportoOrigem = vooProgramado.getAeroportoOrigem();
         this.aeroportoDestino = vooProgramado.getAeroportoDestino();
         this.aeroporto = vooProgramado.getAviao();
         this.horarioPrevisto = vooProgramado.getHorarioPrevisto();
-        this.horarioPartida = vooProgramado.getHorarioPrevisto();
+        this.horarioPartida = null;
         this.recorrencias = vooProgramado.getRecorrencias();
+        this.distanciaEmKm = vooProgramado.getDistanciaEmKm();
         this.classes = new ArrayList<>();
         this.classes.add(new Classe(ClasseAssentos.ECONÔMICA, vooProgramado.getVagasEconomica()));
         this.classes.add(new Classe(ClasseAssentos.EXECUTIVA, vooProgramado.getVagasExecutiva()));
@@ -158,5 +160,11 @@ public class Voo implements Serializable {
                 Recorrências: %s
                 Classes: %s
                 """, id, aeroportoOrigem, aeroportoDestino, aeroporto, horarioPrevisto, horarioPartida, recorrencias, classes);
+    }
+
+
+
+    public int getDistanciaEmKm() {
+        return distanciaEmKm;
     }
 }

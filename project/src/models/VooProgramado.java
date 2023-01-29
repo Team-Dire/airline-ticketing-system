@@ -1,11 +1,9 @@
 package src.models;
 
-import src.utils.types.ClasseAssentos;
 import src.utils.types.Recorrencias;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class VooProgramado implements Serializable {
 
@@ -15,29 +13,32 @@ public class VooProgramado implements Serializable {
     private String aviao;
     private LocalDateTime horarioPrevisto;
     private Recorrencias recorrencias;
+    private final int distanciaEmKm;
     private int vagasEconomica;
     private int vagasExecutiva;
     private int vagasPrimeiraClasse;
 
 
-    public VooProgramado(String aeroportoOrigem, String aeroportoDestino, String aviao, LocalDateTime horarioPrevisto, Recorrencias recorrencias, int vagasEconomica, int vagasExecutiva, int vagasPrimeira) {
+    public VooProgramado(String aeroportoOrigem, String aeroportoDestino, String aviao, LocalDateTime horarioPrevisto, Recorrencias recorrencias, int distanciaEmKm, int vagasEconomica, int vagasExecutiva, int vagasPrimeira) {
         this.aeroportoOrigem = aeroportoOrigem;
         this.aeroportoDestino = aeroportoDestino;
         this.aviao = aviao;
         this.horarioPrevisto = horarioPrevisto;
         this.recorrencias = recorrencias;
+        this.distanciaEmKm = distanciaEmKm;
         this.vagasEconomica = vagasEconomica;
         this.vagasExecutiva = vagasExecutiva;
         this.vagasPrimeiraClasse = vagasPrimeira;
     }
 
-    public VooProgramado(int id, String aeroportoOrigem, String aeroportoDestino, String aviao, LocalDateTime horarioPrevisto, Recorrencias recorrencias, int vagasEconomica, int vagasExecutiva, int vagasPrimeira) {
+    public VooProgramado(int id, String aeroportoOrigem, String aeroportoDestino, String aviao, LocalDateTime horarioPrevisto, Recorrencias recorrencias, int distanciaEmKm, int vagasEconomica, int vagasExecutiva, int vagasPrimeira) {
         this.id = id;
         this.aeroportoOrigem = aeroportoOrigem;
         this.aeroportoDestino = aeroportoDestino;
         this.aviao = aviao;
         this.horarioPrevisto = horarioPrevisto;
         this.recorrencias = recorrencias;
+        this.distanciaEmKm = distanciaEmKm;
         this.vagasEconomica = vagasEconomica;
         this.vagasExecutiva = vagasExecutiva;
         this.vagasPrimeiraClasse = vagasPrimeira;
@@ -134,6 +135,11 @@ public class VooProgramado implements Serializable {
                 Aeroporto: %s
                 Horário previsto: %s
                 Recorrencias: %s
-                """, aeroportoOrigem, aeroportoDestino, aviao, horarioPrevisto, recorrencias);
+                Distance: %d km
+                """, aeroportoOrigem, aeroportoDestino, aviao, horarioPrevisto, recorrencias, distanciaEmKm);
+    }
+
+    public int getDistanciaEmKm() {
+        return distanciaEmKm;
     }
 }

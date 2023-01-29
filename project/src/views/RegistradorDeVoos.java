@@ -19,12 +19,16 @@ public class RegistradorDeVoos {
     private JTextField departureDateField;
     private JTextField departureTimeField;
     private JComboBox<?> recurringComboBox;
+    private JTextField distanceField;
+    private JTextField economySeatsField;
+    private JTextField executiveSeatsField;
+    private JTextField firstClassSeatsField;
 
     public RegistradorDeVoos(ControladorAeroporto controladorAeroporto) {
         this.controladorAeroporto = controladorAeroporto;
         frame = new JFrame("Cadastrar voo");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(700, 500);
+        frame.setSize(600, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         createUIComponents();
@@ -32,7 +36,7 @@ public class RegistradorDeVoos {
 
     private void createUIComponents() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 2, 5, 5));
+        panel.setLayout(new GridLayout(11, 2, 5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 
@@ -44,6 +48,10 @@ public class RegistradorDeVoos {
         JLabel departureDateLabel = new JLabel("Data de partida prevista (Ex: 13/01/2000)");
         JLabel departureTimeLabel = new JLabel("Hora de partida prevista (Ex: 13:00)");
         JLabel recurringLabel = new JLabel("Recorrência");
+        JLabel distanceLabel = new JLabel("Distância (em km)");
+        JLabel economySeatsLabel = new JLabel("Assentos econômicos");
+        JLabel executiveSeatsLabel = new JLabel("Assentos executivos");
+        JLabel firstClassSeatsLabel = new JLabel("Assentos de primeira classe");
 
 
         originAirportField = new JTextField();
@@ -129,6 +137,50 @@ public class RegistradorDeVoos {
         String[] recurrenceValues = {"Diário", "Semanal", "Mensal", "Único"};
         recurringComboBox = new JComboBox<>(recurrenceValues);
 
+        distanceField = new JTextField();
+        distanceField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                }
+            }
+        });
+
+        economySeatsField = new JTextField();
+        economySeatsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                }
+            }
+        });
+
+        executiveSeatsField = new JTextField();
+        executiveSeatsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                }
+            }
+        });
+
+        firstClassSeatsField = new JTextField();
+        firstClassSeatsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                }
+            }
+        });
+
+
+
+
+
         JButton registerButton = new JButton("Cadastrar");
         registerButton.addActionListener(e -> {
             String originAirport = originAirportField.getText();
@@ -165,8 +217,57 @@ public class RegistradorDeVoos {
                 JOptionPane.showMessageDialog(null, "Aeroporto de origem e destino não podem ser iguais");
                 return;
             }
-            
-            String msg = controladorAeroporto.novoAgendamentoDeVoo(originAirport, destinationAirport, airplane, departureDateTime, recurring, 68, 16, 16);
+
+            int distance, economySeats, executiveSeats, firstClassSeats;
+            try {
+                distance = Integer.parseInt(distanceField.getText());
+                if (distance <= 0) {
+                    JOptionPane.showMessageDialog(null, "Distância inválida. Deve ser maior que 0");
+                    return;
+                }
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Distância inválida");
+                return;
+            }
+
+            try {
+                economySeats = Integer.parseInt(economySeatsField.getText());
+                if (economySeats <= 0) {
+                    JOptionPane.showMessageDialog(null, "Número de assentos econômicos inválido. Deve ser maior que 0");
+                    return;
+                }
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Número de assentos econômicos inválido");
+                return;
+            }
+
+            try {
+                executiveSeats = Integer.parseInt(executiveSeatsField.getText());
+                if (executiveSeats <= 0) {
+                    JOptionPane.showMessageDialog(null, "Número de assentos executivos inválido. Deve ser maior que 0");
+                    return;
+                }
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Número de assentos executivos inválido");
+                return;
+            }
+
+            try {
+                firstClassSeats = Integer.parseInt(firstClassSeatsField.getText());
+                if (firstClassSeats <= 0) {
+                    JOptionPane.showMessageDialog(null, "Número de assentos na primeira classe inválido. Deve ser maior que 0");
+                    return;
+                }
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Número de assento na primeira classe inválido");
+                return;
+            }
+
+
+
+
+
+            String msg = controladorAeroporto.novoAgendamentoDeVoo(originAirport, destinationAirport, airplane, departureDateTime, recurring, distance, economySeats, executiveSeats, firstClassSeats);
             if (msg.equals("Sucesso")) {
                 JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso");
                 frame.dispose();
@@ -186,6 +287,14 @@ public class RegistradorDeVoos {
         panel.add(departureTimeField);
         panel.add(recurringLabel);
         panel.add(recurringComboBox);
+        panel.add(distanceLabel);
+        panel.add(distanceField);
+        panel.add(economySeatsLabel);
+        panel.add(economySeatsField);
+        panel.add(executiveSeatsLabel);
+        panel.add(executiveSeatsField);
+        panel.add(firstClassSeatsLabel);
+        panel.add(firstClassSeatsField);
         panel.add(registerButton);
         frame.add(panel);
     }

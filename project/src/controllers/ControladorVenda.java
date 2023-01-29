@@ -1,9 +1,6 @@
 package src.controllers;
 
-import src.models.Aeroporto;
-import src.models.Classe;
-import src.models.Voo;
-import src.models.VooProgramado;
+import src.models.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,9 +19,13 @@ public class ControladorVenda {
         return aeroporto.getVoosDisponiveis(origem, destino, isIdaVolta);
     }
 
-    public boolean novaVenda(String nomeCompleto, LocalDate dataNascimento, String numId, String tipoNumId, Voo voo, String classe, String assento) {
-        boolean possivelOcupar = aeroporto.vagaLivreVoo(nomeCompleto,dataNascimento, numId,  tipoNumId,  voo, classe, assento);
+    public boolean novaVenda(String nomeCompleto, LocalDate dataNascimento, String numId, String tipoNumId, Voo voo, String classe, String assento, Desconto desconto) {
+        boolean possivelOcupar = aeroporto.vagaLivreVoo(nomeCompleto, dataNascimento, numId,  tipoNumId,  voo, classe, assento, desconto);
         return possivelOcupar;
     }
 
+    public Passageiro buscaPassageiro(String nomeCompleto, String numId, String tipoNumId, LocalDate dataNascimento) {
+        ArrayList<Passageiro> passageiros = aeroporto.getPassageiros();
+        return passageiros.stream().filter(passageiro -> passageiro.getNomeCompleto().equals(nomeCompleto) && passageiro.getNumId().equals(numId) && passageiro.getTipoNumId().equals(tipoNumId) && passageiro.getDataNascimento().equals(dataNascimento)).findFirst().orElse(null);
+    }
 }

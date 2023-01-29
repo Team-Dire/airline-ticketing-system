@@ -2,8 +2,7 @@ package src.views;
 
 import src.controllers.ControladorAeroporto;
 import src.controllers.ControladorVenda;
-import src.models.Vaga;
-import src.models.Voo;
+import src.models.*;
 
 import javax.swing.*;
 import java.lang.reflect.Array;
@@ -150,8 +149,50 @@ public class VendaAssentos {
                 classeAssento = "PRIMEIRA_CLASSE";
             }
 
-            boolean result = this.controladorVenda.novaVenda(nome, dataNascimentoPassageiro, vat, tipoDocumento, this.voosDesejado, classeAssento, assentoPassageiro);
-            if (result) {
+
+            boolean resultadoVenda = false;
+
+            Passageiro passageiro = this.controladorVenda.buscaPassageiro(nome, vat, tipoDocumento, dataNascimentoPassageiro);
+            System.out.println("passageiro existe? " + (passageiro != null));
+            Desconto descontoZero = new Desconto(0f);
+
+            if (passageiro == null || !passageiro.isFidelizado()) {
+                System.out.println("passageiro não existe ou não é fidelizado");
+                resultadoVenda = this.controladorVenda.novaVenda(nome, dataNascimentoPassageiro, vat, tipoDocumento, this.voosDesejado, classeAssento, assentoPassageiro, descontoZero);
+            } else {
+                // Desconto padrão: 0%
+                ArrayList<Desconto> descontos = new ArrayList<>();
+                descontos.add(descontoZero);
+
+                // se o passageiro é fidelizado, buscar descontos possíveis
+                ArrayList<Desconto> descontosPassageiro = Desconto.possiveisDescontos(this.voosDesejado, passageiro.getMilhas());
+                descontos.addAll(descontosPassageiro);
+
+                // se não houver descontos possíveis, vender com desconto padrão
+                if (descontos.size() == 1) {
+                    System.out.println("passageiro é fidelizado, mas não há descontos possíveis");
+                    resultadoVenda = this.controladorVenda.novaVenda(nome, dataNascimentoPassageiro, vat, tipoDocumento, this.voosDesejado, classeAssento, assentoPassageiro, descontoZero);
+                } else {
+                    System.out.println("passageiro é fidelizado e há descontos possíveis");
+                    // se houver descontos possíveis, perguntar qual o desconto
+                    String[] descontosArray = new String[descontos.size()];
+                    for (int i = 0; i < descontos.size(); i++) {
+                        int porcentagem = (int) (descontos.get(i).getPorcentagem() * 100);
+                        descontosArray[i] = porcentagem + "% de desconto";
+                    }
+                    JComboBox descontoField = new JComboBox(descontosArray);
+                    descontoField.setBounds(10, 320, 500, 30);
+                    JOptionPane.showMessageDialog(null, descontoField, "Desconto", JOptionPane.QUESTION_MESSAGE);
+                    int index = descontoField.getSelectedIndex();
+
+                    if (index != -1) {
+                    Desconto desconto = descontos.get(index);
+                    resultadoVenda = this.controladorVenda.novaVenda(nome, dataNascimentoPassageiro, vat, tipoDocumento, this.voosDesejado, classeAssento, assentoPassageiro, desconto);
+                    }
+                }
+            }
+
+            if (resultadoVenda) {
                 JOptionPane.showMessageDialog(null, "Venda realizada com sucesso");
                 frame.dispose();
             } else {
