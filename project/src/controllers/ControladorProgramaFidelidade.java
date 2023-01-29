@@ -17,7 +17,7 @@ public class ControladorProgramaFidelidade {
         for (Passageiro passageiro : passageiros) {
             if (passageiro.getNomeCompleto().equals(nomeCompleto) && passageiro.getNumId().equals(numId) && passageiro.getTipoNumId().equals(tipoNumId) && passageiro.getDataNascimento().equals(dataNascimento)) {
                 if (passageiro.getDataNascimento().isAfter(LocalDate.now().minusYears(18))) {
-                    return false;
+                    'return false;
                 }
                 passageiro.ativarFidelizacao();
                 Aeroporto.serialize();
