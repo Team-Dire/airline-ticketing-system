@@ -15,7 +15,7 @@ public class ControladorProgramaFidelidade {
     public boolean fidelizar(String nomeCompleto, String numId, String tipoNumId, LocalDate dataNascimento) {
         ArrayList<Passageiro> passageiros = aeroporto.getPassageiros();
         for (Passageiro passageiro : passageiros) {
-            if (passageiro.getNomeCompleto().equals(nomeCompleto) && passageiro.getNumId().equals(numId) && passageiro.getTipoNumId().equals(tipoNumId) && passageiro.getDataNascimento().equals(dataNascimento)) {
+            if (passageiro.getNumId().equals(numId) && passageiro.getTipoNumId().equals(tipoNumId)) {
                 if (passageiro.getDataNascimento().isAfter(LocalDate.now().minusYears(18))) {
                     return false;
                 }
@@ -34,7 +34,7 @@ public class ControladorProgramaFidelidade {
     public boolean tirarFidelizacao(String nomeCompleto, String numId, String tipoNumId, LocalDate dataNascimento) {
         ArrayList<Passageiro> passageiros = aeroporto.getPassageiros();
         for (Passageiro passageiro : passageiros) {
-            if (passageiro.getNomeCompleto().equals(nomeCompleto) && passageiro.getNumId().equals(numId) && passageiro.getTipoNumId().equals(tipoNumId) && passageiro.getDataNascimento().equals(dataNascimento)) {
+            if (passageiro.getNumId().equals(numId) && passageiro.getTipoNumId().equals(tipoNumId)) {
                 passageiro.desativarFidelizacao();
                 Aeroporto.serialize();
                 return true;

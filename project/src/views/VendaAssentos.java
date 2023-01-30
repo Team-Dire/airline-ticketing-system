@@ -153,11 +153,9 @@ public class VendaAssentos {
             boolean resultadoVenda = false;
 
             Passageiro passageiro = this.controladorVenda.buscaPassageiro(nome, vat, tipoDocumento, dataNascimentoPassageiro);
-            System.out.println("passageiro existe? " + (passageiro != null));
             Desconto descontoZero = new Desconto(0f);
 
             if (passageiro == null || !passageiro.isFidelizado()) {
-                System.out.println("passageiro não existe ou não é fidelizado");
                 resultadoVenda = this.controladorVenda.novaVenda(nome, dataNascimentoPassageiro, vat, tipoDocumento, this.voosDesejado, classeAssento, assentoPassageiro, descontoZero);
             } else {
                 // Desconto padrão: 0%
@@ -173,7 +171,6 @@ public class VendaAssentos {
                     System.out.println("passageiro é fidelizado, mas não há descontos possíveis");
                     resultadoVenda = this.controladorVenda.novaVenda(nome, dataNascimentoPassageiro, vat, tipoDocumento, this.voosDesejado, classeAssento, assentoPassageiro, descontoZero);
                 } else {
-                    System.out.println("passageiro é fidelizado e há descontos possíveis");
                     // se houver descontos possíveis, perguntar qual o desconto
                     String[] descontosArray = new String[descontos.size()];
                     for (int i = 0; i < descontos.size(); i++) {

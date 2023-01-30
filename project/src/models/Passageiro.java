@@ -105,7 +105,6 @@ public class Passageiro implements Serializable {
         int index = 0;
         while (quantidadeMilhas > 0) {
             if (milhas.size() == 0) {
-                System.out.println("Não há milhas suficientes para resgatar o desconto.");
                 return;
             }
             if (milhas.get(index).getResgatadaEm() != null || milhas.get(index).getExpiraEm().isBefore(LocalDate.now())) {

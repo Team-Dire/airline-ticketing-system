@@ -178,7 +178,6 @@ public class ProgramaDeMilhas {
             String tipoNumId = (String) table.getValueAt(selectedRow, 2);
             String dataNascimento = (String) table.getValueAt(selectedRow, 3);
             LocalDate parsedDataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            System.out.println(String.format("nomeCompleto: %s, numId: %s, tipoNumId: %s, dataNascimento: %s", nomeCompleto, numId, tipoNumId, dataNascimento));
             boolean fidelizou = controladorProgramaFidelidade.fidelizar(nomeCompleto, numId, tipoNumId, parsedDataNascimento);
             if (fidelizou) {
                 JOptionPane.showMessageDialog(null, "Fidelizado com sucesso!");

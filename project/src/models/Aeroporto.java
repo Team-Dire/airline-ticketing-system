@@ -211,7 +211,7 @@ public class Aeroporto implements Serializable {
         if (vagaDesejada == null) return false;
 
         // verify if passenger already exists
-        Passageiro passageiro = passageiros.stream().filter(p -> p.getNomeCompleto().equals(nomeCompleto) && p.getDataNascimento().equals(dataNascimento) && p.getNumId().equals(numId) && p.getTipoNumId().equals(tipoNumId)).findFirst().orElse(null);
+        Passageiro passageiro = passageiros.stream().filter(p -> p.getNumId().equals(numId) && p.getTipoNumId().equals(tipoNumId)).findFirst().orElse(null);
         if (passageiro == null) {
             passageiro = new Passageiro(nomeCompleto, numId, tipoNumId, dataNascimento);
             passageiros.add(passageiro);
@@ -244,7 +244,6 @@ public class Aeroporto implements Serializable {
             classe.getVagas().forEach(vaga -> {
                 Passageiro passageiro = vaga.getPassageiro();
                 if (passageiro != null) {
-                    System.out.println("Passageiro " + passageiro.getNomeCompleto() + " está no voo. É fidelizado? " + passageiro.isFidelizado());
                     if (passageiro.isFidelizado()) {
                         passageirosFidelizados.add(passageiro);
                     }
@@ -260,7 +259,6 @@ public class Aeroporto implements Serializable {
         passageirosFidelizados.forEach(passageiro -> {
             float distanciaMilhasNautica = voo.getDistanciaEmKm() / 1.852f;
             int qtdMilhas = (int) (distanciaMilhasNautica / 5);
-            System.out.println("Adicionando " + qtdMilhas + " milhas para o passageiro " + passageiro.getNomeCompleto());
             passageiro.adicionarMilhas(qtdMilhas, dataDecolagem);
         });
         Aeroporto.serialize();
@@ -285,7 +283,6 @@ public class Aeroporto implements Serializable {
 
         passageirosFidelizados.forEach(passageiro -> {
             Desconto desconto = descontosUtilizados.get(passageirosFidelizados.indexOf(passageiro));
-            System.out.println("Passageiro " + passageiro.getNomeCompleto() + " está no voo. É fidelizado? " + passageiro.isFidelizado() + ". Desconto utilizado: " + desconto.getPorcentagem());
             passageiro.resgatarMilhas(voo.getDistanciaEmKm(), desconto, voo.getHorarioPartida().toLocalDate());
         });
         Aeroporto.serialize();
