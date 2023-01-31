@@ -1,16 +1,22 @@
-import src.controllers.AirportController;
-import src.models.Airport;
+import src.controllers.ControladorAeroporto;
+import src.controllers.ControladorProgramaFidelidade;
+import src.controllers.ControladorVenda;
+import src.models.Aeroporto;
 
 public class Main {
-    Airport airport;
-    AirportController airportController;
+    Aeroporto aeroporto;
+    ControladorAeroporto controladorAeroporto;
+    ControladorVenda controladorVenda;
+
+    ControladorProgramaFidelidade controladorProgramaFidelidade;
 
 
     public Main() {
-        airport = new Airport();
-        airportController = new AirportController(airport);
-        new src.views.Main(airportController);
-
+        aeroporto = Aeroporto.getInstance();
+        controladorAeroporto = new ControladorAeroporto(aeroporto);
+        controladorVenda = new ControladorVenda(aeroporto);
+        controladorProgramaFidelidade = new ControladorProgramaFidelidade(aeroporto);
+        new src.views.Main(controladorAeroporto, controladorVenda, controladorProgramaFidelidade);
     }
 
     public static void main(String[] args) {
